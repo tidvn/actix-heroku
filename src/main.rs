@@ -84,12 +84,11 @@ async fn main() -> io::Result<()> {
 
     // random key means that restarting server will invalidate existing session cookies
     let key = actix_web::cookie::Key::from(SESSION_SIGNING_KEY);
-    let host = env::var("HOST").expect("Host not set");
     let port = env::var("PORT")
         .unwrap_or_else(|_| "3000".to_string())
         .parse()
         .expect("PORT must be a number");
-    log::info!("starting HTTP server at {}:{}",host,port);
+    log::info!("starting HTTP server port {}",port);
     HttpServer::new(move || {
         App::new()
             // enable automatic response compression - usually register this first
@@ -138,7 +137,7 @@ async fn main() -> io::Result<()> {
             // default
             .default_service(web::to(default_handler))
     })
-    .bind(("0.0.0.0", port))
+    .bind(("0.0.0.0", port))?
     .workers(2)
     .run()
     .await
