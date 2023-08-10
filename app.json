@@ -1,0 +1,11 @@
+{
+    "name": "Rust on heroku",
+    "description": " Rust application using the Actix framework",
+    "repository": "https://github.com/tidvn/actix-heroku",
+    "success_url": "/",
+    "keywords": ["rust", "actix"],
+    "website": "https://github.com/tidvn/actix-heroku",
+    "env": {
+      "BUILDPACK_URL": "https://github.com/emk/heroku-buildpack-rust.git"
+    }
+  }
